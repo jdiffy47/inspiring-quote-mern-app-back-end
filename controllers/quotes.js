@@ -1,4 +1,5 @@
 import { Quote } from "../models/quote.js";
+import { v2 as cloudinary } from 'cloudinary'
 
 function create(req, res) {
   req.body.owner = req.user.profile
@@ -63,6 +64,25 @@ function update(req ,res) {
     console.log(err) 
     res.status(500).json({err: err.errmsg})
   })
+}
+
+function addPhoto(req, res) {
+  const imageFile = req.files.photo.path
+  Quote.findById(req.params.id)
+    .then(quote => {
+      cloudinary.uploader.upload(imageFile, { tags: `${quote.name}` })
+        .then(image => {
+          quote.photo = image.url
+          quote.save()
+            .then(quote => {
+              res.status(201).json(quote.photo)
+            })
+        })
+        .catch(err => {
+          console.log(err)
+          res.status(500).json(err)
+        })
+    })
 }
 
 export {
