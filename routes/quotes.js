@@ -12,6 +12,7 @@ router.use(decodeUserFromToken)
 router.post('/', checkAuth, quotesCtrl.create)
 router.delete('/:id', checkAuth, quotesCtrl.delete)
 router.put('/:id', checkAuth, quotesCtrl.update)
+router.put('/:id/add-photo', checkAuth, quotesCtrl.addPhoto)
 
 export {
   router

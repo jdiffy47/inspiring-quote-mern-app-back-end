@@ -89,5 +89,6 @@ export {
   create,
   index,
   deleteOne as delete,
-  update
+  update,
+  addPhoto
 }
