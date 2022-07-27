@@ -66,6 +66,8 @@ function update(req ,res) {
   })
 }
 
+// wooo weee
+
 function addPhoto(req, res) {
   const imageFile = req.files.photo.path
   Quote.findById(req.params.id)
